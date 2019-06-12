@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import './App.css'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends React.Component {
+  state = {
+    textareaText: ''
+  }
+
+  textareaRef = React.createRef()
+
+  handleTextareaChange = () => {
+    this.setState({
+      textareaText: this.textareaRef.current.value
+    })
+  }
+
+  render() {
+    const { textareaText } = this.state
+    //console.log(this.state.textareaText)
+    return (
+      <div className="App">
+        <h1>Markdown Previewer</h1>
+        <textarea cols="80" rows="20" value={textareaText} ref={this.textareaRef} onChange={this.handleTextareaChange}
+                  placeholder="Type here, stupid..."/>
+         <p>{textareaText}</p>
+      </div>
+    )
+  }
 }
 
-export default App;
